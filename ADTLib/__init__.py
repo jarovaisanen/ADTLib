@@ -13,9 +13,15 @@ import os
 def ADT(filenames,text='yes',tab='yes',save_dir=None,output_act='no'):
     location=utils.location_extract()
     Onsets=[]
+    print(os.getcwd())
+
+    if not save_dir:
+        save_dir="data\\results"
     if output_act=='yes':
         acts=[]
+
     for k in filenames:
+        print(k)
         specs=utils.spec(k)
         AFs=utils.system_restore(specs,location)
         PP=utils.load_pp_param(location)    
@@ -32,6 +38,7 @@ def ADT(filenames,text='yes',tab='yes',save_dir=None,output_act='no'):
         Onsets.append({'Kick':Peaks[0],'Snare':Peaks[1],'Hihat':Peaks[2]})
         if output_act=='yes':
             acts.append(AFs)
+            
     if output_act=='yes':        
         return Onsets,acts
     else:
